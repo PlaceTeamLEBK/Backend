@@ -6,7 +6,9 @@ public class Main {
 	public static void main(String[] args) {
 		// MainView mainView = new MainView();
 		// mainView.open();
-		Server server = new Server();
+
+		Server server = Server.getInstance();
+
 		server.start();
 	}
 }

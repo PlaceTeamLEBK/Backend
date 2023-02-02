@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @RestController
 public class StaticController {
 
-	@GetMapping("/*")
+	@GetMapping("/test/*")
 	public String index(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println();
 		
