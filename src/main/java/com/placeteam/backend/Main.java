@@ -1,6 +1,5 @@
 package com.placeteam.backend;
 
-
 import com.placeteam.backend.server.Server;
 
 public class Main {
