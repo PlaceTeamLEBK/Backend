@@ -76,7 +76,15 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>     
+		<finalName>PlaceBackEnd</finalName>
+		<resources>
+			<resource>
+				<targetPath>/public</targetPath>
+				<directory>${basedir}/public</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
 	<properties>
 		<maven.compiler.source>19</maven.compiler.source>
 		<maven.compiler.target>19</maven.compiler.target>
