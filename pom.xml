@@ -80,7 +80,7 @@
 		<resources>
 			<resource>
 				<targetPath>/public</targetPath>
-				<directory>${basedir}/public</directory>
+				<directory>${project.basedir}/public</directory>
 				<filtering>false</filtering>
 			</resource>
 		</resources>
