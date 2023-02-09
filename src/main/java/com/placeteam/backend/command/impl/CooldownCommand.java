@@ -1,5 +1,7 @@
 package com.placeteam.backend.command.impl;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.placeteam.backend.command.BaseCommand;
 import com.placeteam.backend.model.Cooldown;
 import com.placeteam.backend.model.enums.CommandNames;
@@ -10,13 +12,15 @@ public class CooldownCommand extends BaseCommand{
 	
 	private Cooldown daten;
 
-	public CooldownCommand(Cooldown daten, long timeStamp) {
+	@JsonCreator
+	public CooldownCommand(@JsonProperty("data") Cooldown daten,@JsonProperty("timeStamp") long timeStamp) {
 		super(NAME, timeStamp);
 		this.daten = daten;
 	}
 
 	@Override
-	public void execute() {
+	public String execute() {
+		return null;
 		//#TODO
 	}
 }
