@@ -13,11 +13,6 @@
 	<build>
 		<plugins>
 			<plugin>
-    				<groupId>org.apache.maven.plugins</groupId>
-    				<artifactId>maven-resources-plugin</artifactId>
-    				<version>3.1.0</version>
-			</plugin> 
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
@@ -82,13 +77,6 @@
 			</plugin>
 		</plugins>
 		<finalName>PlaceBackEnd</finalName>
-		<resources>
-			<resource>
-				<targetPath>/public</targetPath>
-				<directory>${project.basedir}/public</directory>
-				<filtering>false</filtering>
-			</resource>
-		</resources>
 	</build>
 	<properties>
 		<maven.compiler.source>19</maven.compiler.source>
