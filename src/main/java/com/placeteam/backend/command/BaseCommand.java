@@ -1,11 +1,12 @@
 package com.placeteam.backend.command;
 
 import com.placeteam.backend.model.IDaten;
+import com.placeteam.backend.model.enums.CommandNames;
 
 public abstract class BaseCommand {
 
 	
-	private String name;
+	private CommandNames name;
 	
 	private long timeStamp;
 	
@@ -16,14 +17,14 @@ public abstract class BaseCommand {
 	public abstract void execute();
 	
 
-	protected BaseCommand(String name, long timeStamp, IDaten daten) {
+	protected BaseCommand(CommandNames name, long timeStamp, IDaten daten) {
 		super();
 		this.name = name;
 		this.timeStamp = timeStamp;
 		this.daten = daten;
 	}
 
-	public String getName() {
+	public CommandNames getName() {
 		return name;
 	}
 
