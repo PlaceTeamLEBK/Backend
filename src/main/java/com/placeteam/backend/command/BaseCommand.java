@@ -12,7 +12,7 @@ public abstract class BaseCommand {
 	
 	
 	
-	public abstract void execute();
+	public abstract String execute();
 	
 
 	protected BaseCommand(CommandNames name, long timeStamp) {
