@@ -20,7 +20,6 @@ Mögliche Varianten
 ```json
 {
   "command": "init",
-  "key": null,
   "timeStamp": 1675328548
 }
 ```
