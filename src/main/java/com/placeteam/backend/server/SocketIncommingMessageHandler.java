@@ -27,8 +27,10 @@ public class SocketIncommingMessageHandler implements SocketMessaging {
 			ObjectMapper mapper = getObjectMapper();
 			CommandModel commandName = mapper.readValue(message, CommandModel.class);
 			Class<?> commandClass = CommandHelper.getCommandByName(commandName.getCommand());
-			BaseCommand command = (BaseCommand) mapper.readValue(message, commandClass);
-			command.execute();
+			if (commandClass != null) {
+				BaseCommand command = (BaseCommand) mapper.readValue(message, commandClass);
+				command.execute();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception

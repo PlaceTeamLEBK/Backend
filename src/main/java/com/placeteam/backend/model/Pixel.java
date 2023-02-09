@@ -6,11 +6,11 @@ public class Pixel  {
 	
 	private Position position;
 	
-	private String farbe;
+	private String color;
 
 
-	public String getFarbe() {
-		return farbe;
+	public String getColor() {
+		return color;
 	}
 
 	public Position getPosition() {
@@ -23,8 +23,8 @@ public class Pixel  {
 	}
 
 	@JsonSetter("color")
-	public void setFarbe(String farbe) {
-		this.farbe = farbe;
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 }
