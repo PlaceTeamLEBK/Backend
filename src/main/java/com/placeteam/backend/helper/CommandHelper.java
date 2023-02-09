@@ -9,17 +9,19 @@ import com.placeteam.backend.model.enums.CommandNames;
 public class CommandHelper {
 
 	public static Class<?> getCommandByName(String name) {
-		if(name.equals(CommandNames.COOLDOWN.toString())) {
-			return CooldownCommand.class;
-		}
-		if(name.equals(CommandNames.INIT.toString())) {
-			return InitCommand.class;
-		}
-		if(name.equals(CommandNames.SET.toString())) {
-			return SetCommand.class;
-		}
-		if(name.equals(CommandNames.UPDATE.toString())) {
-			return UpdateCommand.class;
+		if (name != null) {
+			if (name.equals(CommandNames.COOLDOWN.toString())) {
+				return CooldownCommand.class;
+			}
+			if (name.equals(CommandNames.INIT.toString())) {
+				return InitCommand.class;
+			}
+			if (name.equals(CommandNames.SET.toString())) {
+				return SetCommand.class;
+			}
+			if (name.equals(CommandNames.UPDATE.toString())) {
+				return UpdateCommand.class;
+			}
 		}
 		return null;
 	}
