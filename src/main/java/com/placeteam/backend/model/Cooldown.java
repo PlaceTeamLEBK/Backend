@@ -1,6 +1,6 @@
 package com.placeteam.backend.model;
 
-public class Cooldown implements IDaten {
+public class Cooldown  {
 
 	private int cooldown;
 

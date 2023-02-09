@@ -1,6 +1,6 @@
 package com.placeteam.backend.model;
 
-public class Pixel implements IDaten {
+public class Pixel  {
 	
 	private Position position;
 	

@@ -1,6 +1,6 @@
 package com.placeteam.backend.model;
 
-public class Karte implements IDaten {
+public class Karte  {
 
 	private String[][] canvasOfColour;
 	
