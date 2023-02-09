@@ -1,6 +1,6 @@
 package com.placeteam.backend.model;
 
-public class Position implements IDaten {
+public class Position  {
 	
 	private int x;
 	
