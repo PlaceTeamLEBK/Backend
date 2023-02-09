@@ -6,8 +6,10 @@ import com.placeteam.backend.model.IDaten;
 
 public class CooldownCommand extends BaseCommand{
 
+	public static final String NAME = "cooldown";
+
 	public CooldownCommand(Cooldown daten, long timeStamp) {
-		super("cooldown", timeStamp,(IDaten) daten);
+		super(NAME, timeStamp,(IDaten) daten);
 	}
 
 	@Override

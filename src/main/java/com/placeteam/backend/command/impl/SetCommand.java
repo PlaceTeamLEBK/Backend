@@ -6,8 +6,10 @@ import com.placeteam.backend.model.Pixel;
 
 public class SetCommand extends BaseClientCommand{
 
+	public static final String NAME = "Set";
+
 	public SetCommand(Pixel daten, long timeStamp, String key) {
-		super("Set", (IDaten) daten, timeStamp, key);
+		super(NAME, (IDaten) daten, timeStamp, key);
 	}
 
 	@Override
