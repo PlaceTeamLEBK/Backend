@@ -26,7 +26,7 @@ public class Server {
 
 	private boolean isServerStarted;
 
-	public Server() {
+	private Server() {
 		isServerStarted = false;
 	}
 
