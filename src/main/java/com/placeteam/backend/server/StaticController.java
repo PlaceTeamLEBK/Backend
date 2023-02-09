@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 public class StaticController {
-
 	@GetMapping("/test/*")
 	public String index(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println();
@@ -31,6 +30,7 @@ public class StaticController {
 			Session session = SessionHolder.getSession(cookies[0].getValue());
 			System.out.println(session.isSessionXOld(1));
 		}
+
 		return "Greetings from Spring Boot!";
 	}
 
