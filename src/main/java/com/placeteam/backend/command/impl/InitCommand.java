@@ -9,10 +9,8 @@ import com.placeteam.backend.model.UpdateDaten;
 
 public class InitCommand extends BaseCommand{
 
-	public static final String NAME = "init";
-
 	public InitCommand(long timeStamp, String key) {
-		super(NAME, timeStamp, (IDaten) new EmptyModel());
+		super("init", timeStamp, (IDaten) new EmptyModel());
 	}
 
 	@Override
