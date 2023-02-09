@@ -71,7 +71,6 @@ Schickt dem Server eine Koordinate und eine Farbe und den Key aus der Session
 ```json
 {
   "command": "set",
-  "key": "5251d829377e9590737d859d04bf3e0e17091e5cd62626c92e7af82d9efc602f",
   "timeStamp": 1675328548,
   "data": {
     "pixel": {
