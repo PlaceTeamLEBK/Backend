@@ -5,9 +5,7 @@ import java.util.Enumeration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.WebUtils;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -33,30 +31,7 @@ public class StaticController {
 		System.err.printf("Session ID: %s\n", session.getId());
 		System.err.printf("timeStamp: %s\n", session.getAttribute("timeStamp"));
 		System.err.printf("fresh: %b\n", session.getAttribute("fresh"));
+
 		return new FileSystemResource("public/index.html");
-
-		//Cookie sessionCookie = WebUtils.getCookie(request, "session");
-		//if (sessionCookie == null) {
-		//	String sessionUuid = SessionHolder.createSessionId();
-		//	createSessionCookie(response, sessionUuid);
-		//}
-
-		//Cookie[] cookies = request.getCookies();
-		//if (cookies == null) {
-		//	String sessionUuid = SessionHolder.createSessionId();
-		//	createSessionCookie(response, sessionUuid);
-		//} else {
-		//	System.out.println(cookies[0].getValue());
-		//	Session session = SessionHolder.getSession(cookies[0].getValue());
-		//	System.out.println(session.isSessionXOld(1));
-		//}
-
-		//return new FileSystemResource("public/index.html");
-	}
-
-	private void createSessionCookie(HttpServletResponse response, String sessionUuid) {
-		Cookie cookie = new Cookie("session", sessionUuid);
-		cookie.setMaxAge(7 * 24 * 60 * 60);
-		response.addCookie(cookie);
 	}
 }
