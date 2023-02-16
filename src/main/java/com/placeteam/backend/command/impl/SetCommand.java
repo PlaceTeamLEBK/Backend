@@ -17,8 +17,7 @@ public class SetCommand extends BaseClientCommand{
 	}
 
 	@Override
-	public String execute() {
-		return null;
+	public void execute() {
 		//#TODO
 	}
 }

@@ -9,12 +9,12 @@ import java.sql.SQLException;
 
 public class Bootstrap {
     private Server server;
-    private DatabaseConnector databaseConnector;
+    private static DatabaseConnector databaseConnector;
     public Bootstrap() {
         try {
             databaseConnector = new SQLiteDriver();
-            databaseConnector.connect();
-            databaseConnector.createTables(DefaultTables.getTables());
+            getDatabaseConnector().connect();
+            getDatabaseConnector().createTables(DefaultTables.getTables());
 
             server = Server.getInstance();
             databaseConnector = new SQLiteDriver();
@@ -28,4 +28,7 @@ public class Bootstrap {
     public void start() {
         server.start();
     }
+	public static DatabaseConnector getDatabaseConnector() {
+		return databaseConnector;
+	}
 }
