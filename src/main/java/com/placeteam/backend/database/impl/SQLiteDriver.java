@@ -2,9 +2,12 @@ package com.placeteam.backend.database.impl;
 
 import com.placeteam.backend.database.DatabaseConnector;
 import com.placeteam.backend.database.SQLUtils;
+import com.placeteam.backend.model.Karte;
+import com.placeteam.backend.model.STD_VALUES;
 import com.placeteam.backend.model.database.DBTable;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -20,12 +23,8 @@ public class SQLiteDriver implements DatabaseConnector {
 
     @Override
     public void connect() throws SQLException {
-
-    }
-
-    @Override
-    public void createTable(DBTable table) throws SQLException {
-
+        // Connect to sqlite database
+        connection = DriverManager.getConnection("jdbc:sqlite:" + STD_VALUES.DATABASE_NAME);
     }
 
     private Statement createStatement() throws SQLException {
@@ -42,5 +41,18 @@ public class SQLiteDriver implements DatabaseConnector {
            statement.executeUpdate(sqlStatement);
         }
         statement.close();
+    }
+
+    @Override
+    public void setPixel(String sessionId, int x, int y, String color) throws SQLException {
+        Statement statement = createStatement();
+        String sqlStatement = SQLUtils.setPixelSQL(sessionId, x, y, color);
+        statement.executeUpdate(sqlStatement);
+        statement.close();
+    }
+
+    @Override
+    public Karte getKarte() throws SQLException {
+        return null;
     }
 }
