@@ -15,5 +15,5 @@ public interface DatabaseConnector {
 
     public Karte getKarte() throws SQLException, DatabaseException;
 
-    public void close() throws SQLException;
+    public void close();
 }

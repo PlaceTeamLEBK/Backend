@@ -79,7 +79,12 @@ public class SQLiteDriver implements DatabaseConnector {
     }
 
     @Override
-    public void close() throws SQLException {
-        connection.close();
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
