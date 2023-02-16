@@ -16,14 +16,6 @@ Der Client fragt hiermit die vollständige Karte an.
 }
 ```
 
-Mögliche Varianten
-```json
-{
-  "command": "init",
-  "timeStamp": 1675328548
-}
-```
-
 ### `update`
 
 Gibt dem Client an, welcher Pixel sich auf welche Farbe geändert hat.
