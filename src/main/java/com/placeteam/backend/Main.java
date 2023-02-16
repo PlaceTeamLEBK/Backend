@@ -7,8 +7,7 @@ public class Main {
 		// MainView mainView = new MainView();
 		// mainView.open();
 
-		Server server = Server.getInstance();
-
-		server.start();
+		Bootstrap bootstrap = new Bootstrap();
+		bootstrap.start();
 	}
 }
