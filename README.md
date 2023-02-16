@@ -16,6 +16,19 @@ Der Client fragt hiermit die vollständige Karte an.
 }
 ```
 
+### `paint`
+
+```json
+{
+  "command": "paint",
+  "timeStamp": 1675328548,
+  "data": {
+    "cooldown": 123,
+    "pixels": [[]]
+  }
+}
+```
+
 ### `update`
 
 Gibt dem Client an, welcher Pixel sich auf welche Farbe geändert hat.
