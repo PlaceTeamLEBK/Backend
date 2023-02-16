@@ -46,29 +46,11 @@ Gibt dem Client an, welcher Pixel sich auf welche Farbe geändert hat.
   "command": "update",
   "timeStamp": 1675328548,
   "data": {
-    "pixels": [
-      {
-        "color": "#79ABF3",
-        "position": {
-          "x": 80,
-          "y": 25
-        }
-      },
-      {
-        "color": "#943724",
-        "position": {
-          "x": 53,
-          "y": 43
-        }
-      },
-      {
-        "color": "#8537AB",
-        "position": {
-          "x": 205,
-          "y": 24
-        }
-      }
-    ]
+    "color": "#79ABF3",
+    "position": {
+      "x": 80,
+      "y": 25
+    }
   }
 }
 ```
