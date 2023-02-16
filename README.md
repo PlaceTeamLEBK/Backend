@@ -16,7 +16,13 @@ Der Client fragt hiermit die vollständige Karte an.
 }
 ```
 
+## Commands
+
 ### `paint`
+
+Gibt dem Client die aktuelle, vollständige Karte (Antwort auf `init`).
+
+#### Beispiel
 
 ```json
 {
@@ -69,7 +75,7 @@ Gibt dem Client an, welcher Pixel sich auf welche Farbe geändert hat.
 
 ### `set`
 
-Schickt dem Server eine Koordinate und eine Farbe und den Key aus der Session
+Schickt dem Server eine Koordinate und eine Farbe und den Key aus der Session.
 
 #### Beispiel
 
@@ -91,7 +97,7 @@ Schickt dem Server eine Koordinate und eine Farbe und den Key aus der Session
 
 ### `cooldown`
 
-Schickt dem Client die dauer, die er warten muss, bis der nächste Pixel platziert werden darf (Antwort auf `set`)
+Schickt dem Client die dauer, die er warten muss, bis der nächste Pixel platziert werden darf (Antwort auf `set`).
 
 #### Beispiel
 
