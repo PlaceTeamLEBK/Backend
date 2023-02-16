@@ -16,8 +16,6 @@ Der Client fragt hiermit die vollständige Karte an.
 }
 ```
 
-## Commands
-
 ### `paint`
 
 Gibt dem Client die aktuelle, vollständige Karte (Antwort auf `init`).
