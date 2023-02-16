@@ -15,11 +15,6 @@ public class SQLiteDriver implements DatabaseConnector {
 
     private Connection connection;
 
-    public SQLiteDriver() {
-        // Connect to sqlite database
-
-    }
-
     @Override
     public void connect() throws SQLException {
         // Connect to sqlite database
@@ -81,5 +76,10 @@ public class SQLiteDriver implements DatabaseConnector {
         } catch (SQLException e) {
             throw new DatabaseException(e.getMessage());
         }
+    }
+
+    @Override
+    public void close() throws SQLException {
+        connection.close();
     }
 }

@@ -14,4 +14,6 @@ public interface DatabaseConnector {
     public void setPixel(String sessionId, int x, int y, String color) throws SQLException, DatabaseException;
 
     public Karte getKarte() throws SQLException, DatabaseException;
+
+    public void close() throws SQLException;
 }
