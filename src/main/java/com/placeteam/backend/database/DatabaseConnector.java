@@ -11,7 +11,7 @@ public interface DatabaseConnector {
 
     public void createTables(DBTable[] tables) throws SQLException;
 
-    public void setPixel(String sessionId, int x, int y, String color) throws SQLException;
+    public void setPixel(String sessionId, int x, int y, String color) throws SQLException, DatabaseException;
 
-    public Karte getKarte() throws SQLException;
+    public Karte getKarte() throws SQLException, DatabaseException;
 }
