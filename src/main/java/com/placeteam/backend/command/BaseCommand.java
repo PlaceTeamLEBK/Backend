@@ -1,5 +1,7 @@
 package com.placeteam.backend.command;
 
+import org.springframework.web.socket.WebSocketSession;
+
 import com.placeteam.backend.model.enums.CommandNames;
 
 public abstract class BaseCommand {
@@ -9,10 +11,12 @@ public abstract class BaseCommand {
 	
 	private long timeStamp;
 	
+	private WebSocketSession session;
 	
 	
 	
-	public abstract String execute();
+	
+	public abstract void execute();
 	
 
 	protected BaseCommand(CommandNames name, long timeStamp) {
@@ -29,6 +33,14 @@ public abstract class BaseCommand {
 		return timeStamp;
 	}
 
+
+	public void setSession(WebSocketSession session) {
+		this.session = session;
+	}
+
+	public WebSocketSession getSession() {
+		return session;
+	}
 
 	
 
