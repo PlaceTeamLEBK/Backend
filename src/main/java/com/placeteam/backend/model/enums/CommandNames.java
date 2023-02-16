@@ -3,11 +3,10 @@ package com.placeteam.backend.model.enums;
 public enum CommandNames {
 	COOLDOWN,
 	INIT,
-	SET, UPDATE;
+	SET, UPDATE, PAINT;
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString().toLowerCase();
 	}
 }

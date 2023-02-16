@@ -24,7 +24,7 @@ public class SocketHandler extends TextWebSocketHandler{
 			remove(messsageHandler);
 			return;
 		}
-		messsageHandler.incommingMessage(message);
+		messsageHandler.incommingMessage(message, null);
 	}
 	
 	public static void remove(SocketMessaging messageHandler) {
