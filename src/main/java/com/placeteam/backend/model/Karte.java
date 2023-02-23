@@ -1,5 +1,7 @@
 package com.placeteam.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 public class Karte  {
 
 	private String[][] canvasOfColour;
@@ -17,6 +19,7 @@ public class Karte  {
 		this.canvasOfColour = new String[size][size];
 	}
 
+	@JsonGetter("pixels")
 	public String[][] getCanvasOfColour() {
 		return canvasOfColour;
 	}
