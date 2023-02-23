@@ -2,7 +2,7 @@ package com.placeteam.backend.model;
 
 public class InitReturn {
 
-	private Karte karte;
+	private PaintData karte;
 	
 	private Cooldown cooldown;
 
@@ -14,11 +14,11 @@ public class InitReturn {
 		this.cooldown = cooldown;
 	}
 
-	public Karte getKarte() {
+	public PaintData getKarte() {
 		return karte;
 	}
 
-	public void setKarte(Karte karte) {
+	public void setKarte(PaintData karte) {
 		this.karte = karte;
 	}
 }

@@ -4,7 +4,7 @@ import com.placeteam.backend.database.DataValidator;
 import com.placeteam.backend.database.DatabaseConnector;
 import com.placeteam.backend.database.DatabaseException;
 import com.placeteam.backend.database.SQLUtils;
-import com.placeteam.backend.model.Karte;
+import com.placeteam.backend.model.PaintData;
 import com.placeteam.backend.model.STD_VALUES;
 import com.placeteam.backend.model.database.DBTable;
 
@@ -61,11 +61,11 @@ public class SQLiteDriver implements DatabaseConnector {
 
     private static final String GET_KARTE_SQL = "SELECT max(id),x,y,color FROM pixel GROUP BY x,y;";
     @Override
-    public Karte getKarte() throws DatabaseException {
+    public PaintData getKarte() throws DatabaseException {
         try {
             Statement statement = createStatement();
             ResultSet resultSet = statement.executeQuery(GET_KARTE_SQL);
-            Karte karte = new Karte();
+            PaintData karte = new PaintData();
             while (resultSet.next()) {
                 int x = resultSet.getInt("x");
                 int y = resultSet.getInt("y");
