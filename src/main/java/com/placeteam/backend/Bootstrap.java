@@ -20,9 +20,9 @@ public class Bootstrap {
         } catch (SQLException e) {
             System.out.println("Error connecting to database");
             e.printStackTrace();
-        } finally {
-            databaseConnector.close();
-        }
+        } 
+        Thread thread = new Thread(() -> databaseConnector.close());
+		Runtime.getRuntime().addShutdownHook(thread);
     }
     public void start() {
         server.start();
