@@ -4,6 +4,8 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.placeteam.backend.model.enums.CommandNames;
 
+import jakarta.servlet.http.HttpSession;
+
 public abstract class BaseCommand {
 
 	
@@ -12,9 +14,6 @@ public abstract class BaseCommand {
 	private long timeStamp;
 	
 	private WebSocketSession session;
-	
-	
-	
 	
 	public abstract void execute();
 	
