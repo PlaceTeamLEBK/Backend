@@ -26,7 +26,6 @@ import ch.qos.logback.core.joran.conditional.IfAction;
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 	private List<WebSocketSession> sessions = new ArrayList<>();
-	// TODO: assign session as soon as init is run
 	private Map<String, WebSocketSession> assignedSessions = new HashMap<>();
 
 	private static final SocketHandler instance = new SocketHandler();
@@ -71,6 +70,7 @@ public class SocketHandler extends TextWebSocketHandler {
 				if(BaseClientCommand.class.isAssignableFrom(command.getClass())) {
 					BaseClientCommand clientcommand = (BaseClientCommand) command;
 					String key = clientcommand.getKey();
+					assignedSessions.put(key, session);
 				}
 				command.setSession(session);
 				command.execute();
