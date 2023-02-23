@@ -2,44 +2,48 @@ package com.placeteam.backend.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-@Component
-public class SocketHandler extends TextWebSocketHandler{
-	private static List<SocketMessaging> messageHandlerList = new ArrayList<SocketMessaging>();
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper.Builder;
+import com.placeteam.backend.command.BaseCommand;
+import com.placeteam.backend.helper.CommandHelper;
 
-	private static final SocketHandler thisObj = new SocketHandler();
+@Component
+public class SocketHandler extends TextWebSocketHandler {
+	private List<WebSocketSession> sessions = new ArrayList<>();
+	// TODO: assign session as soon as init is run
+	private Map<String, WebSocketSession> assignedSessions = new HashMap<>();
+
+	private static final SocketHandler instance = new SocketHandler();
 	
 	public static SocketHandler getInstance() {
-		return thisObj;
+		return instance;
 	}
-	
-	public static void notifyMessageHandler(String message, SocketMessaging messsageHandler) {
-		if (messsageHandler == null) {
-			remove(messsageHandler);
-			return;
-		}
-		messsageHandler.incommingMessage(message);
+
+	private static ObjectMapper getObjectMapper() {
+		Builder builder = JsonMapper.builder();
+		builder = builder.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS, true);
+		// TODO: true
+		builder = builder.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+		JsonMapper buildMapper = builder.build();
+		return buildMapper;
 	}
-	
-	public static void remove(SocketMessaging messageHandler) {
-		messageHandlerList.remove(messageHandler);
-	}
-	
-	private List<WebSocketSession> sessions = new ArrayList<>();
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.add(session);
-	}
-	
-	public static void add(SocketMessaging messageHandler) {
-		messageHandlerList.add(messageHandler);
 	}
 	
 	public void sendMessage(String message) throws IOException {
@@ -50,5 +54,41 @@ public class SocketHandler extends TextWebSocketHandler{
 			}
 			session.sendMessage(textMessage);
 		}
+	}
+
+	// TODO
+	public void incomingMessage(String message) {
+		try {
+			ObjectMapper mapper = getObjectMapper();
+			CommandModel commandName = mapper.readValue(message, CommandModel.class);
+			Class<?> commandClass = CommandHelper.getCommandByName(commandName.getCommand());
+			if (commandClass != null) {
+				BaseCommand command = (BaseCommand) mapper.readValue(message, commandClass);
+				command.execute();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+	}
+
+	private static class CommandModel {
+		private String command;
+
+		public String getCommand() {
+			return command;
+		}
+
+		@JsonSetter("command")
+		public void setCommand(String command) {
+			this.command = command;
+		}
+
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			return getCommand();
+		}
+
 	}
 }
