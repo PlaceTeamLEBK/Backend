@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.placeteam.backend.Bootstrap;
 import com.placeteam.backend.command.BaseCommand;
-import com.placeteam.backend.model.Karte;
+import com.placeteam.backend.model.PaintData;
 import com.placeteam.backend.model.enums.CommandNames;
 
 public class PaintCommand extends BaseCommand {
@@ -20,7 +20,7 @@ public class PaintCommand extends BaseCommand {
 	
 	public static final CommandNames NAME = CommandNames.PAINT;
 	
-	private Karte daten;
+	private PaintData daten;
 	
 	protected PaintCommand( long timeStamp, WebSocketSession session) {
 		super(NAME, timeStamp);
@@ -52,7 +52,7 @@ public class PaintCommand extends BaseCommand {
 
 
 	@JsonGetter("data")
-	public Karte getDaten() {
+	public PaintData getDaten() {
 		return daten;
 	}
 

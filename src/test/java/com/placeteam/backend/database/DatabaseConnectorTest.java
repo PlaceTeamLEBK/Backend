@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import com.placeteam.backend.database.impl.SQLiteDriver;
-import com.placeteam.backend.model.Karte;
+import com.placeteam.backend.model.PaintData;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DatabaseConnectorTest {
@@ -39,7 +39,7 @@ public class DatabaseConnectorTest {
     @Test
     @Order(2)
     public void testGetKarte() throws Exception {
-        Karte karte = databaseConnector.getKarte();
+        PaintData karte = databaseConnector.getKarte();
         String[][] canvas = karte.getCanvasOfColour();
         for (int i = 0; i < 1000; i++) {
             assertEquals(canvas[i].length, 1000);

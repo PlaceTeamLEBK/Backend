@@ -2,7 +2,9 @@ package com.placeteam.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 
-public class Karte  {
+public class PaintData  {
+	
+	private int cooldown;
 
 	private String[][] canvasOfColour;
 
@@ -14,13 +16,19 @@ public class Karte  {
 		return canvasOfColour[x][y];
 	}
 
-	public Karte() {
+	public PaintData() {
 		int size = STD_VALUES.CANVAS_WIDTH;
 		this.canvasOfColour = new String[size][size];
+		this.cooldown = STD_VALUES.COOLDOWN_EXITS;
 	}
 
 	@JsonGetter("pixels")
 	public String[][] getCanvasOfColour() {
 		return canvasOfColour;
+	}
+	
+	@JsonGetter("cooldown")
+	public int getCooldown() {
+		return cooldown;
 	}
 }
