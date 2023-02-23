@@ -1,5 +1,7 @@
 package com.placeteam.backend.command.impl;
 
+import org.springframework.web.socket.WebSocketSession;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.placeteam.backend.command.BaseCommand;
@@ -20,6 +22,6 @@ public class CooldownCommand extends BaseCommand{
 
 	@Override
 	public void execute() {
-		//#TODO
+		WebSocketSession session = super.getSession();
 	}
 }

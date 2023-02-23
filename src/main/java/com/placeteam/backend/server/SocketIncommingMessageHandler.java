@@ -28,6 +28,7 @@ public class SocketIncommingMessageHandler implements SocketMessaging {
 			Class<?> commandClass = CommandHelper.getCommandByName(commandName.getCommand());
 			if (commandClass != null) {
 				BaseCommand command = (BaseCommand) mapper.readValue(message, commandClass);
+				command.setSession(session);
 				command.execute();
 			}
 		} catch (Exception e) {
@@ -50,9 +51,9 @@ public class SocketIncommingMessageHandler implements SocketMessaging {
 
 		@Override
 		public String toString() {
-			// TODO Auto-generated method stub
 			return getCommand();
 		}
 
 	}
+
 }
