@@ -57,7 +57,7 @@ public class SocketHandler extends TextWebSocketHandler {
 	}
 
 	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		try {
 			String payload = message.getPayload();
 			ObjectMapper mapper = getObjectMapper();
