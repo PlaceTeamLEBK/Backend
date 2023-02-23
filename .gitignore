@@ -1,4 +1,11 @@
 /target/
 .metadata
 /.idea/
+<<<<<<< HEAD
 placeteam.db
+=======
+database.db
+database.db-journal
+*.db
+*.db
+>>>>>>> main

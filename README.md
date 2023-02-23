@@ -83,7 +83,7 @@ Schickt dem Client die dauer, die er warten muss, bis der nächste Pixel platzie
 
 ```json
 {
-  "command": "set",
+  "command": "cooldown",
   "timeStamp": 1675328548,
   "data": {
     "seconds": 60

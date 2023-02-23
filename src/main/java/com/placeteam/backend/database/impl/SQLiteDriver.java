@@ -1,25 +1,19 @@
 package com.placeteam.backend.database.impl;
 
+import com.placeteam.backend.database.DataValidator;
 import com.placeteam.backend.database.DatabaseConnector;
+import com.placeteam.backend.database.DatabaseException;
 import com.placeteam.backend.database.SQLUtils;
 import com.placeteam.backend.model.Karte;
 import com.placeteam.backend.model.STD_VALUES;
 import com.placeteam.backend.model.database.DBTable;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SQLiteDriver implements DatabaseConnector {
     private static SQLiteDriver instance;
 
     private Connection connection;
-
-    public SQLiteDriver() {
-        // Connect to sqlite database
-
-    }
 
     @Override
     public void connect() throws SQLException {
@@ -43,16 +37,54 @@ public class SQLiteDriver implements DatabaseConnector {
         statement.close();
     }
 
+    private static final String SET_PIXEL_SQL = "INSERT INTO pixel (sessionId,x, y, color) VALUES (?, ?, ?, ?);";
+
     @Override
-    public void setPixel(String sessionId, int x, int y, String color) throws SQLException {
-        Statement statement = createStatement();
-        String sqlStatement = SQLUtils.setPixelSQL(sessionId, x, y, color);
-        statement.executeUpdate(sqlStatement);
-        statement.close();
+    public void setPixel(String sessionId, int x, int y, String color) throws DatabaseException {
+        try {
+            DataValidator.checkCoordinate(x, y);
+            DataValidator.checkColor(color);
+
+            PreparedStatement statement = connection.prepareStatement(SET_PIXEL_SQL);
+            statement.setString(1, sessionId);
+            statement.setInt(2, x);
+            statement.setInt(3, y);
+            statement.setString(4, color);
+            statement.executeUpdate();
+            statement.close();
+        } catch (DatabaseException e) {
+            throw e;
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
+
+    private static final String GET_KARTE_SQL = "SELECT max(id),x,y,color FROM pixel GROUP BY x,y;";
+    @Override
+    public Karte getKarte() throws DatabaseException {
+        try {
+            Statement statement = createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_KARTE_SQL);
+            Karte karte = new Karte();
+            while (resultSet.next()) {
+                int x = resultSet.getInt("x");
+                int y = resultSet.getInt("y");
+                String color = resultSet.getString("color");
+                karte.setPixel(x, y, color);
+            }
+            return karte;
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     @Override
-    public Karte getKarte() throws SQLException {
-        return null;
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

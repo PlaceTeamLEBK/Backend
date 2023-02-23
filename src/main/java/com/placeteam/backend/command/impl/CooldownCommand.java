@@ -19,8 +19,7 @@ public class CooldownCommand extends BaseCommand{
 	}
 
 	@Override
-	public String execute() {
-		return null;
+	public void execute() {
 		//#TODO
 	}
 }

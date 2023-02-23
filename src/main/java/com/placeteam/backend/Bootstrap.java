@@ -8,8 +8,8 @@ import com.placeteam.backend.server.Server;
 import java.sql.SQLException;
 
 public class Bootstrap {
-    private Server server;
-    private DatabaseConnector databaseConnector;
+    private static Server server;
+    private static DatabaseConnector databaseConnector;
     public Bootstrap() {
         try {
             databaseConnector = new SQLiteDriver();
@@ -17,13 +17,17 @@ public class Bootstrap {
             databaseConnector.createTables(DefaultTables.getTables());
 
             server = Server.getInstance();
-            databaseConnector = new SQLiteDriver();
         } catch (SQLException e) {
             System.out.println("Error connecting to database");
             e.printStackTrace();
+        } finally {
+            databaseConnector.close();
         }
     }
     public void start() {
         server.start();
     }
+	public static DatabaseConnector getDatabaseConnector() {
+		return databaseConnector;
+	}
 }
