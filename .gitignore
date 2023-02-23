@@ -1,7 +1,4 @@
 /target/
 .metadata
 /.idea/
-database.db
-database.db-journal
-*.db
 *.db
