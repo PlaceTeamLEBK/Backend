@@ -12,6 +12,11 @@ public class Karte  {
 		return canvasOfColour[x][y];
 	}
 
+	public Karte() {
+		int size = STD_VALUES.CANVAS_WIDTH;
+		this.canvasOfColour = new String[size][size];
+	}
+
 	public String[][] getCanvasOfColour() {
 		return canvasOfColour;
 	}
