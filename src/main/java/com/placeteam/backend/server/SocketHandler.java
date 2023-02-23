@@ -56,19 +56,20 @@ public class SocketHandler extends TextWebSocketHandler {
 		}
 	}
 
-	// TODO
-	public void incomingMessage(String message) {
+	@Override
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		try {
+			String payload = message.getPayload();
 			ObjectMapper mapper = getObjectMapper();
-			CommandModel commandName = mapper.readValue(message, CommandModel.class);
+			CommandModel commandName = mapper.readValue(payload, CommandModel.class);
 			Class<?> commandClass = CommandHelper.getCommandByName(commandName.getCommand());
 			if (commandClass != null) {
-				BaseCommand command = (BaseCommand) mapper.readValue(message, commandClass);
+				BaseCommand command = (BaseCommand) mapper.readValue(payload, commandClass);
+				command.setSession(session);
 				command.execute();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO: handle exception
 		}
 	}
 

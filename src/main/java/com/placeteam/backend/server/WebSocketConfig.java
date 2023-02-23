@@ -16,6 +16,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
 		socketHandler = SocketHandler.getInstance();
 		registry.addHandler(socketHandler, WEBSOCKET_HANDLER_PATH);
 		
-		// TODO SocketHandler.add(socketIncommingMessageHandler);
+		//SocketHandler.add(socketIncommingMessageHandler);
 	}
 }

@@ -4,15 +4,14 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import com.placeteam.backend.database.DatabaseException;
+import com.placeteam.backend.helper.ServerUtils;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.placeteam.backend.Bootstrap;
 import com.placeteam.backend.command.BaseCommand;
 import com.placeteam.backend.model.Karte;
 import com.placeteam.backend.model.enums.CommandNames;
-import com.placeteam.backend.server.SocketIncommingMessageHandler;
 
 public class PaintCommand extends BaseCommand {
 	
@@ -32,7 +31,7 @@ public class PaintCommand extends BaseCommand {
 	WebSocketSession session = super.getSession();
 	try {
 		daten = Bootstrap.getDatabaseConnector().getKarte();
-		String resultAsJson = SocketIncommingMessageHandler.getObjectMapper().writeValueAsString(this);
+		String resultAsJson = ServerUtils.getObjectMapper().writeValueAsString(this);
 		if (session.isOpen()) {
 			session.sendMessage(new TextMessage(resultAsJson));
 		}
