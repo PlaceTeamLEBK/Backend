@@ -8,6 +8,8 @@ import com.placeteam.backend.helper.ServerUtils;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.placeteam.backend.Bootstrap;
 import com.placeteam.backend.command.BaseCommand;
 import com.placeteam.backend.model.Karte;
@@ -46,6 +48,12 @@ public class PaintCommand extends BaseCommand {
 	}
 
 
+	}
+
+
+	@JsonGetter("data")
+	public Karte getDaten() {
+		return daten;
 	}
 
 

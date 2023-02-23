@@ -17,8 +17,11 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper.Builder;
+import com.placeteam.backend.command.BaseClientCommand;
 import com.placeteam.backend.command.BaseCommand;
 import com.placeteam.backend.helper.CommandHelper;
+
+import ch.qos.logback.core.joran.conditional.IfAction;
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
@@ -65,6 +68,10 @@ public class SocketHandler extends TextWebSocketHandler {
 			Class<?> commandClass = CommandHelper.getCommandByName(commandName.getCommand());
 			if (commandClass != null) {
 				BaseCommand command = (BaseCommand) mapper.readValue(payload, commandClass);
+				if(BaseClientCommand.class.isAssignableFrom(command.getClass())) {
+					BaseClientCommand clientcommand = (BaseClientCommand) command;
+					String key = clientcommand.getKey();
+				}
 				command.setSession(session);
 				command.execute();
 			}
