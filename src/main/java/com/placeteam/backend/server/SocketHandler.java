@@ -35,8 +35,8 @@ public class SocketHandler extends TextWebSocketHandler {
 	private static ObjectMapper getObjectMapper() {
 		Builder builder = JsonMapper.builder();
 		builder = builder.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS, true);
-		// TODO: true
-		builder = builder.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+		builder = builder.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		
 		JsonMapper buildMapper = builder.build();
 		return buildMapper;
 	}
