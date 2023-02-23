@@ -3,6 +3,7 @@ package com.placeteam.backend.command.impl;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import com.placeteam.backend.database.DatabaseException;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -38,12 +39,14 @@ public class PaintCommand extends BaseCommand {
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	} catch (SQLException e) {
+	} catch (DatabaseException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
 	}
-	
-	
+
+
 	}
 
 
