@@ -2,6 +2,8 @@ package com.placeteam.backend.command;
 
 import org.springframework.web.socket.WebSocketSession;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.placeteam.backend.model.enums.CommandNames;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,7 +34,7 @@ public abstract class BaseCommand {
 		return timeStamp;
 	}
 
-
+	@JsonIgnore
 	public void setSession(WebSocketSession session) {
 		this.session = session;
 	}
