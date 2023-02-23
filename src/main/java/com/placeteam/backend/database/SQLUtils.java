@@ -2,6 +2,7 @@ package com.placeteam.backend.database;
 
 import com.placeteam.backend.model.database.DBColumn;
 import com.placeteam.backend.model.database.DBTable;
+
 public class SQLUtils {
     public static String createTableSQL(DBTable table) {
         String tableName = table.getTableName();
@@ -37,5 +38,14 @@ public class SQLUtils {
         }
 
         return tableSQLString;
+    }
+    private static final String SET_PIXEL_SQL = "INSERT INTO pixel (sessionId,x, y, color) VALUES (%s, %d, %d, %s);";
+    
+    public static String setPixelSQL(String sessionId, int x, int y, String color) {
+        if (color.length() > 6) {
+            color = color.substring(1, 7);
+        }
+        String sql = String.format(SET_PIXEL_SQL, sessionId, x, y, color);
+        return sql;
     }
 }
