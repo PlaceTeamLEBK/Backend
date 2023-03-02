@@ -64,13 +64,11 @@ Schickt dem Server eine Koordinate und eine Farbe und den Key aus der Session.
   "command": "set",
   "timeStamp": 1675328548,
   "data": {
-    "pixel": {
       "color": "#5832BF",
       "position": {
         "x": 58,
         "y": 93
       }
-    }
   }
 }
 ```
