@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import com.placeteam.backend.database.DatabaseException;
+import com.placeteam.backend.helper.CommandHelper;
 import com.placeteam.backend.helper.ServerUtils;
+import com.placeteam.backend.model.Cooldown;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -33,6 +35,7 @@ public class PaintCommand extends BaseCommand {
 	WebSocketSession session = super.getSession();
 	try {
 		daten = Bootstrap.getDatabaseConnector().getKarte();
+		daten.setCooldown(CommandHelper.getCooldown(getSession()));
 		String resultAsJson = ServerUtils.getObjectMapper().writeValueAsString(this);
 		if (session.isOpen()) {
 			session.sendMessage(new TextMessage(resultAsJson));
