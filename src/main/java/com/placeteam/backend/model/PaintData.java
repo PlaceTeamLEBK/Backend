@@ -19,7 +19,10 @@ public class PaintData  {
 	public PaintData() {
 		int size = STD_VALUES.CANVAS_WIDTH;
 		this.canvasOfColour = new String[size][size];
-		this.cooldown = STD_VALUES.COOLDOWN_EXITS;
+	}
+
+	public void setCooldown(int cooldown) {
+		this.cooldown = cooldown;
 	}
 
 	@JsonGetter("pixels")
