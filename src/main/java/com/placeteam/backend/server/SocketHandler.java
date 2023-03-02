@@ -21,7 +21,7 @@ import com.placeteam.backend.command.BaseClientCommand;
 import com.placeteam.backend.command.BaseCommand;
 import com.placeteam.backend.helper.CommandHelper;
 
-import ch.qos.logback.core.joran.conditional.IfAction;
+import jakarta.servlet.http.HttpSession;
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
@@ -67,10 +67,15 @@ public class SocketHandler extends TextWebSocketHandler {
 			Class<?> commandClass = CommandHelper.getCommandByName(commandName.getCommand());
 			if (commandClass != null) {
 				BaseCommand command = (BaseCommand) mapper.readValue(payload, commandClass);
-				if(BaseClientCommand.class.isAssignableFrom(command.getClass())) {
+				if (BaseClientCommand.class.isAssignableFrom(command.getClass())) {
 					BaseClientCommand clientcommand = (BaseClientCommand) command;
 					String key = clientcommand.getKey();
-					assignedSessions.put(key, session);
+					List<HttpSession> activeSessions = HttpSessionConfig.getActiveSessions();
+					for (HttpSession activeSession : activeSessions) {
+						if (activeSession.getId().equals(key)) {
+							assignedSessions.put(key, session);
+						}
+					}
 				}
 				command.setSession(session);
 				command.execute();
