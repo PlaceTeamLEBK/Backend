@@ -10,6 +10,7 @@ import com.placeteam.backend.command.BaseCommand;
 import com.placeteam.backend.database.DatabaseConnector;
 import com.placeteam.backend.database.DatabaseException;
 import com.placeteam.backend.helper.CommandHelper;
+import com.placeteam.backend.helper.ErrorUtils;
 import com.placeteam.backend.model.Cooldown;
 import com.placeteam.backend.model.Pixel;
 import com.placeteam.backend.model.STD_VALUES;
@@ -23,51 +24,55 @@ import static com.placeteam.backend.helper.CommandHelper.getCooldown;
 
 public class SetCommand extends BaseCommand {
 
+
 	public static final CommandNames NAME = CommandNames.SET;
 	
 	private final Pixel daten;
 
-	public SetCommand(@JsonProperty("data") Pixel daten) {
-		super(NAME);
-		this.daten = daten;
-	}
 
-	@Override
-	public void execute() {
-		try {
-			DatabaseConnector databaseConnector = Bootstrap.getDatabaseConnector();
-			Integer cooldownTime= CommandHelper.getCooldown(getSession());
-			Cooldown cooldown = new Cooldown();
-			if (cooldownTime != null) {
-				if (cooldownTime == 0){
-					databaseConnector.setPixel(CommandHelper.getKey(getSession()), daten.getPosition().getX(), daten.getPosition().getY(), daten.getColor());
-					new UpdateCommand(daten).execute();
-					cooldown.setCooldown(STD_VALUES.COOLDOWN_EXITS);
-					resetCooldown();
-				} else {
-					cooldown.setCooldown(cooldownTime);
-				}
-			} else {
-				cooldown.setCooldown(STD_VALUES.COOLDOWN_NOT_EXITS);
-			}
-			CooldownCommand cooldownCommand = new CooldownCommand(cooldown);
-			cooldownCommand.setSession(getSession());
-			cooldownCommand.execute();
-		} catch (SQLException | DatabaseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    public SetCommand(@JsonProperty("data") Pixel daten) {
+        super(NAME);
+        this.daten = daten;
+    }
 
-	private void resetCooldown() {
-		HttpSession httpSession = CommandHelper.getHttpSession(getSession());
-		if (httpSession != null){
-			httpSession.setAttribute("timestamp", System.currentTimeMillis());
-			httpSession.setAttribute("fresh", false);
-		}
-	}
+    @Override
+    public void execute() {
+        if (daten == null || daten.getPosition() == null || daten.getColor() == null || daten.getPosition().getX() == null || daten.getPosition().getY() == null) {
+            ErrorUtils.sendNoDataError(getSession());
+        } else {
+            try {
+                DatabaseConnector databaseConnector = Bootstrap.getDatabaseConnector();
+                Integer cooldownTime = CommandHelper.getCooldown(getSession());
+                Cooldown cooldown = new Cooldown();
+                if (cooldownTime != null) {
+                    if (cooldownTime == 0) {
+                        databaseConnector.setPixel(CommandHelper.getKey(getSession()), daten.getPosition().getX(), daten.getPosition().getY(), daten.getColor());
+                        new UpdateCommand(daten).execute();
+                        cooldown.setCooldown(STD_VALUES.COOLDOWN_EXITS);
+                        resetCooldown();
+                    } else {
+                        cooldown.setCooldown(cooldownTime);
+                    }
+                } else {
+                    cooldown.setCooldown(STD_VALUES.COOLDOWN_NOT_EXITS);
+                }
+                CooldownCommand cooldownCommand = new CooldownCommand(cooldown);
+                cooldownCommand.setSession(getSession());
+                cooldownCommand.execute();
+            } catch (SQLException | DatabaseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
 
-
+    private void resetCooldown() {
+        HttpSession httpSession = CommandHelper.getHttpSession(getSession());
+        if (httpSession != null) {
+            httpSession.setAttribute("timestamp", System.currentTimeMillis());
+            httpSession.setAttribute("fresh", false);
+        }
+    }
 
 
 }

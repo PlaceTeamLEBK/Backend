@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.placeteam.backend.command.impl.InitCommand;
+import com.placeteam.backend.helper.ErrorUtils;
+import com.placeteam.backend.model.Error;
+import com.placeteam.backend.model.STD_VALUES;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -34,7 +37,7 @@ public class SocketHandler extends TextWebSocketHandler {
         return instance;
     }
 
-    private static ObjectMapper getObjectMapper() {
+    public static ObjectMapper getObjectMapper() {
         Builder builder = JsonMapper.builder();
         builder = builder.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS, true);
         builder = builder.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -69,9 +72,12 @@ public class SocketHandler extends TextWebSocketHandler {
                 BaseCommand command = (BaseCommand) mapper.readValue(payload, commandClass);
                 command.setSession(session);
                 command.execute();
+            } else {
+                ErrorUtils.sendError(session, "Command:  \"" + commandName + "\" not found", STD_VALUES.COMMAND_NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            ErrorUtils.sendAffrontError(session);
         }
     }
 
