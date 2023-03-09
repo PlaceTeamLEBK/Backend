@@ -93,6 +93,28 @@ Wird geworfen mit `code` 666, falls der übertragen Command unbekannt ist.
 ```json
 {
  "code": 666,
- "error": "Command XY nicht gefunden"
+ "error": "Command: \"XY\" not found"
+}
+```
+
+### `Fehlende Daten`
+
+Wird geworfen mit `code` 400, wenn Daten fehlen.
+
+```json
+{
+ "code": 400,
+ "error": "No data provided"
+}
+```
+
+### `Unbekannter Fehler`
+
+Wird geworfen mit `code` 999, wenn ein Unbekannter Fehler passiert.
+
+```json
+{
+ "code": 999,
+ "error": "You're a waste of life."
 }
 ```
