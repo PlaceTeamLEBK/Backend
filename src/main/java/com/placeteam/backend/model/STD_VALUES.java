@@ -9,4 +9,6 @@ public class STD_VALUES {
 
 	public static final int COOLDOWN_NOT_EXITS = 10;
 
+	public static final int COMMAND_UNKOWN = 666;
+
 }

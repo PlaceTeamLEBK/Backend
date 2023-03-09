@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.placeteam.backend.command.impl.InitCommand;
+import com.placeteam.backend.model.Error;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -69,6 +70,9 @@ public class SocketHandler extends TextWebSocketHandler {
                 BaseCommand command = (BaseCommand) mapper.readValue(payload, commandClass);
                 command.setSession(session);
                 command.execute();
+            } else {
+                Error error = new Error("Command:  \"" + commandName + "\" not found", 666);
+                session.sendMessage(new TextMessage(mapper.writeValueAsString(error)));
             }
         } catch (Exception e) {
             e.printStackTrace();
