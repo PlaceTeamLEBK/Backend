@@ -24,9 +24,11 @@ import static com.placeteam.backend.helper.CommandHelper.getCooldown;
 
 public class SetCommand extends BaseCommand {
 
-    public static final CommandNames NAME = CommandNames.SET;
 
-    private Pixel daten;
+	public static final CommandNames NAME = CommandNames.SET;
+	
+	private final Pixel daten;
+
 
     public SetCommand(@JsonProperty("data") Pixel daten) {
         super(NAME);

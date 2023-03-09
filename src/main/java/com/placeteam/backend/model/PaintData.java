@@ -6,7 +6,7 @@ public class PaintData  {
 	
 	private int cooldown;
 
-	private String[][] canvasOfColour;
+	private final String[][] canvasOfColour;
 
 	public void setPixel(int x, int y, String colour) {
 		canvasOfColour[x][y] = colour;

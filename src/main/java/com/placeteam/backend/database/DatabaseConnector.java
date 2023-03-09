@@ -3,17 +3,22 @@ package com.placeteam.backend.database;
 import com.placeteam.backend.model.PaintData;
 import com.placeteam.backend.model.database.DBTable;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface DatabaseConnector {
 
-    public void connect() throws SQLException;
+    void connect() throws SQLException;
 
-    public void createTables(DBTable[] tables) throws SQLException;
+    void createTables(DBTable[] tables) throws SQLException;
 
-    public void setPixel(String sessionId, int x, int y, String color) throws SQLException, DatabaseException;
+    void setPixel(String sessionId, int x, int y, String color) throws SQLException, DatabaseException;
 
-    public PaintData getKarte() throws SQLException, DatabaseException;
+    PaintData getKarte() throws SQLException, DatabaseException;
 
-    public void close();
+    ResultSet executeQuery(String query) throws SQLException;
+
+    void executeUpdate(String query) throws SQLException;
+
+    void close();
 }

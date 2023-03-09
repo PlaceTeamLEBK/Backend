@@ -1,9 +1,9 @@
 package com.placeteam.backend.model.database;
 
 public class ForeignKey {
-    private String foreignKey;
-    private String foreignTable;
-    private String foreignColumn;
+    private final String foreignKey;
+    private final String foreignTable;
+    private final String foreignColumn;
 
     public ForeignKey(String foreignKey, String foreignTable, String foreignColumn) {
         this.foreignKey = foreignKey;
