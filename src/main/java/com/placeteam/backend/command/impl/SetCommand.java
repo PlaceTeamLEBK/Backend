@@ -25,7 +25,7 @@ public class SetCommand extends BaseCommand {
 
 	public static final CommandNames NAME = CommandNames.SET;
 	
-	private Pixel daten;
+	private final Pixel daten;
 
 	public SetCommand(@JsonProperty("data") Pixel daten) {
 		super(NAME);

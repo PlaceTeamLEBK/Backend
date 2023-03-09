@@ -27,6 +27,24 @@ public class DefaultTables {
         return table;
     }
 
+    private static DBTable countryTable() {
+        DBTable table = new DBTable("country");
+        DBColumn id = new DBColumn("id", "INTEGER");
+        id.setAutoincrement(true);
+        id.setPk(true);
+        DBColumn name = new DBColumn("name", "VARCHAR(64)");
+        name.setNotnull(true);
+        DBColumn code = new DBColumn("code", "CHAR(2)");
+        code.setNotnull(true);
+        DBColumn created = new DBColumn("created", "DATETIME(6)");
+        created.setNotnull(true);
+        created.setDflt_value("CURRENT_TIMESTAMP");
+
+        DBColumn[] columns = {id, name, code, created};
+        table.addColumns(columns);
+        return table;
+    }
+
     public static DBTable[] getTables() {
         DBTable[] tables = { pixelTable()};
 
