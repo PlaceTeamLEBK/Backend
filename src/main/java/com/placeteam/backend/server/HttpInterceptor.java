@@ -1,19 +1,18 @@
 package com.placeteam.backend.server;
 
-import java.util.Enumeration;
-
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@RestController
-public class StaticController {
-	@GetMapping(path = "/")
-	public FileSystemResource index(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+import java.util.Enumeration;
+
+import org.springframework.web.servlet.HandlerInterceptor;
+
+public class HttpInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        HttpSession session = request.getSession();
+
 		Enumeration<String> headerKeys = request.getHeaderNames();
 		while (headerKeys.hasMoreElements()) {
 			String key = headerKeys.nextElement();
@@ -32,13 +31,6 @@ public class StaticController {
 		System.err.printf("timeStamp: %s\n", session.getAttribute("timeStamp"));
 		System.err.printf("fresh: %b\n", session.getAttribute("fresh"));
 
-		return new FileSystemResource("public/index.html");
-	}
-
-	@GetMapping(path = "/favicon.ico")
-	public FileSystemResource favicon() {
-		return new FileSystemResource("public/favicon.png");
-	}
-
-
+        return true;
+    }
 }

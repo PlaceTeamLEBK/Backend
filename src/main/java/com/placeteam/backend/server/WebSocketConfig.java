@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean;
 
 @Configuration
@@ -18,8 +17,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		socketHandler = SocketHandler.getInstance();
 		registry.addHandler(socketHandler, WEBSOCKET_HANDLER_PATH);
-		
-		//SocketHandler.add(socketIncommingMessageHandler);
 	}
 
 	@Bean
