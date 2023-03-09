@@ -24,12 +24,11 @@ jobs:
     - name: Build with Maven
       run: mvn clean install
       
-    - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/PlaceBackEnd-jar-with-dependencies.jar
-        asset_name: PlaceTeam-Backend.jar
-        tag: ${{ github.ref }}
-        overwrite: true
-        body: "Automated release"
+    - name: Step 3 - Use the Upload Artifact GitHub Action
+      uses: actions/upload-artifact@v2
+      with: 
+        name: PlaceBackEnd
+        path: target/PlaceBackEnd-jar-with-dependencies.jar
+        
+        
+        
