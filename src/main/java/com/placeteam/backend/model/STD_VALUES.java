@@ -9,6 +9,9 @@ public class STD_VALUES {
 
 	public static final int COOLDOWN_NOT_EXITS = 10;
 
-	public static final int COMMAND_UNKOWN = 666;
+	public static final int COMMAND_NOT_FOUND = 666;
 
+	public static final int NO_DATA_PROVIDED = 400;
+
+	public static final int ERROR_CODE_AFFRONT = 999;
 }
