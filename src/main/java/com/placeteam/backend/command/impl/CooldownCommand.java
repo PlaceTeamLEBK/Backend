@@ -20,8 +20,8 @@ public class CooldownCommand extends BaseCommand{
 	private final Cooldown daten;
 
 	@JsonCreator
-	public CooldownCommand(@JsonProperty("data") Cooldown daten,@JsonProperty("timeStamp") long timeStamp) {
-		super(NAME, timeStamp);
+	public CooldownCommand(@JsonProperty("data") Cooldown daten) {
+		super(NAME);
 		this.daten = daten;
 	}
 
