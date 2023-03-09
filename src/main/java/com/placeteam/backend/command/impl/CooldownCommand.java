@@ -17,7 +17,7 @@ public class CooldownCommand extends BaseCommand{
 
 	public static final CommandNames NAME = CommandNames.COOLDOWN;
 	
-	private Cooldown daten;
+	private final Cooldown daten;
 
 	@JsonCreator
 	public CooldownCommand(@JsonProperty("data") Cooldown daten) {
