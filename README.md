@@ -12,7 +12,6 @@ Der Client fragt hiermit die vollständige Karte an.
 {
   "command": "init",
   "key": "5251d829377e9590737d859d04bf3e0e17091e5cd62626c92e7af82d9efc602f",
-  "timeStamp": 1675328548
 }
 ```
 
@@ -25,8 +24,7 @@ Gibt dem Client die aktuelle, vollständige Karte (Antwort auf `init`).
 ```json
 {
   "command": "paint",
-  "timeStamp": 1675328548,
-  "data": {
+    "data": {
     "cooldown": 123,
     "pixels": [[]]
   }
@@ -42,7 +40,6 @@ Gibt dem Client an, welcher Pixel sich auf welche Farbe geändert hat.
 ```json
 {
   "command": "update",
-  "timeStamp": 1675328548,
   "data": {
     "color": "#79ABF3",
     "position": {
@@ -62,7 +59,6 @@ Schickt dem Server eine Koordinate und eine Farbe und den Key aus der Session.
 ```json
 {
   "command": "set",
-  "timeStamp": 1675328548,
   "data": {
       "color": "#5832BF",
       "position": {
@@ -82,7 +78,6 @@ Schickt dem Client die dauer, die er warten muss, bis der nächste Pixel platzie
 ```json
 {
   "command": "cooldown",
-  "timeStamp": 1675328548,
   "data": {
     "seconds": 60
   }
