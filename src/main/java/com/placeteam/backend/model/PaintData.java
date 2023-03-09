@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 
 public class PaintData  {
 	
-	private final int cooldown;
+	private int cooldown;
 
 	private final String[][] canvasOfColour;
 
