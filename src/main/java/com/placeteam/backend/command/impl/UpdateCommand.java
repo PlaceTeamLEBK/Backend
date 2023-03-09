@@ -14,7 +14,7 @@ public class UpdateCommand extends BaseCommand{
 
 	public static final CommandNames NAME = CommandNames.UPDATE;
 
-	private Pixel daten;
+	private final Pixel daten;
 
 	public UpdateCommand(@JsonProperty("data") Pixel daten,@JsonProperty("timeStamp") long timeStamp) {
 		super(NAME, timeStamp);

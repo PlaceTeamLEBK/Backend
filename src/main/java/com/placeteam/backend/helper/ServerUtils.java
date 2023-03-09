@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 public class ServerUtils {
-    private static ObjectMapper objectMapper = createObjectMapper();
+    private static final ObjectMapper objectMapper = createObjectMapper();
     private static ObjectMapper createObjectMapper() {
         JsonMapper.Builder builder = JsonMapper.builder();
         builder = builder.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS, true);

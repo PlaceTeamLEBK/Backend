@@ -11,9 +11,9 @@ import jakarta.servlet.http.HttpSession;
 public abstract class BaseCommand {
 
 	
-	private CommandNames name;
+	private final CommandNames name;
 	
-	private long timeStamp;
+	private final long timeStamp;
 	
 	private WebSocketSession session;
 	

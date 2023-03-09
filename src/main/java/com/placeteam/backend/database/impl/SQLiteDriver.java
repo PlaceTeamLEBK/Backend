@@ -79,6 +79,18 @@ public class SQLiteDriver implements DatabaseConnector {
     }
 
     @Override
+    public ResultSet executeQuery(String query) throws SQLException {
+        Statement statement = createStatement();
+        return statement.executeQuery(query);
+    }
+
+    @Override
+    public void executeUpdate(String query) throws SQLException {
+        Statement statement = createStatement();
+        statement.executeUpdate(query);
+    }
+
+    @Override
     public void close() {
         try {
             connection.close();

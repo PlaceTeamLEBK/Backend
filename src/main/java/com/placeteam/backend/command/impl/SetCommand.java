@@ -15,7 +15,7 @@ public class SetCommand extends BaseClientCommand{
 
 	public static final CommandNames NAME = CommandNames.SET;
 	
-	private Pixel daten;
+	private final Pixel daten;
 
 	public SetCommand(@JsonProperty("data") Pixel daten, @JsonProperty("timeStamp") long timeStamp,@JsonProperty("key") String key) {
 		super(NAME, timeStamp, key);

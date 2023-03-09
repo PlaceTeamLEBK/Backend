@@ -25,8 +25,8 @@ import jakarta.servlet.http.HttpSession;
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
-	private List<WebSocketSession> sessions = new ArrayList<>();
-	private Map<String, WebSocketSession> assignedSessions = new HashMap<>();
+	private final List<WebSocketSession> sessions = new ArrayList<>();
+	private final Map<String, WebSocketSession> assignedSessions = new HashMap<>();
 
 	private static final SocketHandler instance = new SocketHandler();
 	

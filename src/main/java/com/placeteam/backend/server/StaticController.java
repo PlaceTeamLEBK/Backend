@@ -34,4 +34,11 @@ public class StaticController {
 
 		return new FileSystemResource("public/index.html");
 	}
+
+	@GetMapping(path = "/favicon.ico")
+	public FileSystemResource favicon() {
+		return new FileSystemResource("public/favicon.png");
+	}
+
+
 }
