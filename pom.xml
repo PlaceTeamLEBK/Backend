@@ -81,8 +81,8 @@
 		<finalName>PlaceBackEnd</finalName>
 	</build>
 	<properties>
-		<maven.compiler.source>19</maven.compiler.source>
-		<maven.compiler.target>19</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sqlite.version>3.40.1.0</sqlite.version>
 		<juint.version>5.9.2</juint.version>
