@@ -27,8 +27,8 @@ public class SetCommand extends BaseCommand {
 	
 	private Pixel daten;
 
-	public SetCommand(@JsonProperty("data") Pixel daten, @JsonProperty("timeStamp") long timeStamp) {
-		super(NAME, timeStamp);
+	public SetCommand(@JsonProperty("data") Pixel daten) {
+		super(NAME);
 		this.daten = daten;
 	}
 
@@ -41,7 +41,7 @@ public class SetCommand extends BaseCommand {
 			if (cooldownTime != null) {
 				if (cooldownTime == 0){
 					databaseConnector.setPixel(CommandHelper.getKey(getSession()), daten.getPosition().getX(), daten.getPosition().getY(), daten.getColor());
-					new UpdateCommand(daten, System.currentTimeMillis()).execute();
+					new UpdateCommand(daten).execute();
 					cooldown.setCooldown(STD_VALUES.COOLDOWN_EXITS);
 					resetCooldown();
 				} else {
@@ -50,7 +50,7 @@ public class SetCommand extends BaseCommand {
 			} else {
 				cooldown.setCooldown(STD_VALUES.COOLDOWN_NOT_EXITS);
 			}
-			CooldownCommand cooldownCommand = new CooldownCommand(cooldown, getTimeStamp());
+			CooldownCommand cooldownCommand = new CooldownCommand(cooldown);
 			cooldownCommand.setSession(getSession());
 			cooldownCommand.execute();
 		} catch (SQLException | DatabaseException e) {

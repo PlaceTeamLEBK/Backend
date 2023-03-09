@@ -13,26 +13,20 @@ public abstract class BaseCommand {
 	
 	private CommandNames name;
 	
-	private long timeStamp;
-	
 	private WebSocketSession session;
 	
 	public abstract void execute();
 	
 
-	protected BaseCommand(CommandNames name, long timeStamp) {
+	protected BaseCommand(CommandNames name) {
 		super();
 		this.name = name;
-		this.timeStamp = timeStamp;
 	}
 
 	public CommandNames getName() {
 		return name;
 	}
 
-	public long getTimeStamp() {
-		return timeStamp;
-	}
 
 	@JsonIgnore
 	public void setSession(WebSocketSession session) {
