@@ -24,8 +24,8 @@ public class PaintCommand extends BaseCommand {
 	
 	private PaintData daten;
 	
-	protected PaintCommand( long timeStamp, WebSocketSession session) {
-		super(NAME, timeStamp);
+	protected PaintCommand(  WebSocketSession session) {
+		super(NAME);
 		super.setSession(session);
 	}
 

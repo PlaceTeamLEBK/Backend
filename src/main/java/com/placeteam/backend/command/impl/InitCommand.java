@@ -20,8 +20,8 @@ public class InitCommand extends BaseCommand {
 	private final String key;
 
 	@JsonCreator
-	public InitCommand(@JsonProperty("timeStamp") long timeStamp,@JsonProperty("key") String key) {
-		super(NAME, timeStamp);
+	public InitCommand(@JsonProperty("key") String key) {
+		super(NAME);
 
 		this.key = key;
 	}
@@ -36,7 +36,7 @@ public class InitCommand extends BaseCommand {
 			}
 		}
 
-		new PaintCommand(getTimeStamp(), super.getSession()).execute();
+		new PaintCommand( super.getSession()).execute();
 	}
 	
 	
