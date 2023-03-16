@@ -3,10 +3,9 @@ package com.placeteam.backend.server;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.Enumeration;
-
-import org.springframework.web.servlet.HandlerInterceptor;
 
 public class HttpInterceptor implements HandlerInterceptor {
     @Override
@@ -18,6 +17,15 @@ public class HttpInterceptor implements HandlerInterceptor {
 			String key = headerKeys.nextElement();
 			System.err.println(key + ": " + request.getHeader(key));
 		}
+
+		jakarta.servlet.http.Cookie[] cookies = request.getCookies();
+		String sessionId = cookies[0].getValue();
+
+		if(HttpSessionConfig.getSession(sessionId) == null){
+			HttpSessionConfig.addSession(sessionId, session);
+		}
+
+
 
 		Object timeStampAttribute = session.getAttribute("timeStamp");
 		Object freshAttribute = session.getAttribute("fresh");

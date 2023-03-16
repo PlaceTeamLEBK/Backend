@@ -20,6 +20,14 @@ public class HttpSessionConfig {
         return new ArrayList<>(sessions.values());
     }
 
+    public static HttpSession getSession(String sessionId) {
+        return sessions.get(sessionId);
+    }
+
+    public static void addSession(String sessionId, HttpSession session) {
+        sessions.put(sessionId, session);
+    }
+
     @Bean
     public ServletListenerRegistrationBean<HttpSessionListener> httpSessionListener() {
         ServletListenerRegistrationBean<HttpSessionListener> listenerRegistrationBean = new ServletListenerRegistrationBean<>();
