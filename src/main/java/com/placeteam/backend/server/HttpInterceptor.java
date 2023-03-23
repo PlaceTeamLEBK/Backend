@@ -18,9 +18,7 @@ public class HttpInterceptor implements HandlerInterceptor {
 			System.err.println(key + ": " + request.getHeader(key));
 		}
 
-		jakarta.servlet.http.Cookie[] cookies = request.getCookies();
-		String sessionId = cookies[0].getValue();
-
+		String sessionId = session.getId();
 		if(HttpSessionConfig.getSession(sessionId) == null){
 			HttpSessionConfig.addSession(sessionId, session);
 		}

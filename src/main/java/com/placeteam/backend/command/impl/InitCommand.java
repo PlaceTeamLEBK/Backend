@@ -33,13 +33,18 @@ public class InitCommand extends BaseCommand {
 			ErrorUtils.sendError(getSession(), "No key provided", STD_VALUES.NO_DATA_PROVIDED);
 		} else{
 			List<HttpSession> activeSessions = HttpSessionConfig.getActiveSessions();
+			boolean found = false;
 			for (HttpSession activeSession : activeSessions) {
-				if (activeSession.getId().equals(key)) {
+				if (activeSession.getId()!= null && activeSession.getId().equals(key)) {
 					activeSession.setAttribute("timestamp", System.currentTimeMillis());
 					SocketHandler.getInstance().assignedSessions.put(key, getSession());
+					found = true;
 				}
 			}
 
+			if (!found) {
+				ErrorUtils.sendError(getSession(), "Invalid key", STD_VALUES.INVALID_KEY);
+			}
 			new PaintCommand( super.getSession()).execute();
 		}
 	}

@@ -14,4 +14,6 @@ public class STD_VALUES {
 	public static final int NO_DATA_PROVIDED = 400;
 
 	public static final int ERROR_CODE_AFFRONT = 999;
+
+	public static final int INVALID_KEY = 401;
 }
