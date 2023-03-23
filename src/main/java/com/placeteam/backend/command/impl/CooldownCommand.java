@@ -32,6 +32,9 @@ public class CooldownCommand extends BaseCommand{
 		String resultAsJson = ServerUtils.getObjectMapper().writeValueAsString(this);
 		if (session.isOpen()) {
 			session.sendMessage(new TextMessage(resultAsJson));
+		} else {
+			System.err.println("Session is closed");
+			throw new RuntimeException("Session is closed");
 		}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
