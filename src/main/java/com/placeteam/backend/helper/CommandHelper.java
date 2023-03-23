@@ -49,6 +49,7 @@ public class CommandHelper {
 		long diff = (currentTimeMillis - timestamp) / 1000;
 		int cooldown = ((boolean) httpSession.getAttribute("fresh")) ? STD_VALUES.COOLDOWN_NOT_EXITS : STD_VALUES.COOLDOWN_EXITS;
 		int result = cooldown - (int) diff;
+		System.out.println("Cooldown: " + result + " is fresh: " + httpSession.getAttribute("fresh") + " diff: " + diff+ " cooldown: " + cooldown);
 		return result > 0 ? result : 0;
 	}
 
