@@ -9,18 +9,13 @@ import java.util.Enumeration;
 
 public class HttpInterceptor implements HandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         HttpSession session = request.getSession();
 
 		Enumeration<String> headerKeys = request.getHeaderNames();
 		while (headerKeys.hasMoreElements()) {
 			String key = headerKeys.nextElement();
 			System.err.println(key + ": " + request.getHeader(key));
-		}
-
-		String sessionId = session.getId();
-		if(HttpSessionConfig.getSession(sessionId) == null){
-			HttpSessionConfig.addSession(sessionId, session);
 		}
 
 
