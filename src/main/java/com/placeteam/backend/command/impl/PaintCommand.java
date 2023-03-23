@@ -40,13 +40,8 @@ public class PaintCommand extends BaseCommand {
 		if (session.isOpen()) {
 			session.sendMessage(new TextMessage(resultAsJson));
 		}
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
+	} catch (Exception e) {
 		e.printStackTrace();
-	} catch (DatabaseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (SQLException e) {
 		throw new RuntimeException(e);
 	}
 

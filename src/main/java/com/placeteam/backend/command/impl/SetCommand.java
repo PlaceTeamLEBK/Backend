@@ -41,29 +41,42 @@ public class SetCommand extends BaseCommand {
             ErrorUtils.sendNoDataError(getSession());
         } else {
             try {
-                DatabaseConnector databaseConnector = Bootstrap.getDatabaseConnector();
-                Integer cooldownTime = CommandHelper.getCooldown(getSession());
-                Cooldown cooldown = new Cooldown();
-                if (cooldownTime != null) {
-                    if (cooldownTime == 0) {
-                        databaseConnector.setPixel(CommandHelper.getKey(getSession()), daten.getPosition().getX(), daten.getPosition().getY(), daten.getColor());
-                        new UpdateCommand(daten).execute();
-                        cooldown.setCooldown(STD_VALUES.COOLDOWN_EXITS);
-                        resetCooldown();
-                    } else {
-                        cooldown.setCooldown(cooldownTime);
-                    }
-                } else {
-                    cooldown.setCooldown(STD_VALUES.COOLDOWN_NOT_EXITS);
-                }
-                CooldownCommand cooldownCommand = new CooldownCommand(cooldown);
-                cooldownCommand.setSession(getSession());
-                cooldownCommand.execute();
+                Cooldown cooldown = handlediffrentCooldown();
+                returnCooldown(cooldown);
             } catch (SQLException | DatabaseException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
+    }
+
+    private void returnCooldown(Cooldown cooldown) {
+        CooldownCommand cooldownCommand = new CooldownCommand(cooldown);
+        cooldownCommand.setSession(getSession());
+        cooldownCommand.execute();
+    }
+
+    private Cooldown handlediffrentCooldown() throws SQLException, DatabaseException {
+        Integer cooldownTime = CommandHelper.getCooldown(getSession());
+        Cooldown cooldown = new Cooldown();
+        if (cooldownTime != null) {
+            if (cooldownTime == 0) {
+                setData(cooldown);
+            } else {
+                cooldown.setCooldown(cooldownTime);
+            }
+        } else {
+            cooldown.setCooldown(STD_VALUES.COOLDOWN_NOT_EXITS);
+        }
+        return cooldown;
+    }
+
+    private void setData(Cooldown cooldown) throws SQLException, DatabaseException {
+        DatabaseConnector databaseConnector = Bootstrap.getDatabaseConnector();
+        databaseConnector.setPixel(CommandHelper.getKey(getSession()), daten.getPosition().getX(), daten.getPosition().getY(), daten.getColor());
+        new UpdateCommand(daten).execute();
+        cooldown.setCooldown(STD_VALUES.COOLDOWN_EXITS);
+        resetCooldown();
     }
 
     private void resetCooldown() {

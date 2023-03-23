@@ -32,15 +32,7 @@ public class InitCommand extends BaseCommand {
 		if (key == null) {
 			ErrorUtils.sendError(getSession(), "No key provided", STD_VALUES.NO_DATA_PROVIDED);
 		} else{
-			List<HttpSession> activeSessions = HttpSessionConfig.getActiveSessions();
-			boolean found = false;
-			for (HttpSession activeSession : activeSessions) {
-				if (activeSession.getId()!= null && activeSession.getId().equals(key)) {
-					activeSession.setAttribute("timestamp", System.currentTimeMillis());
-					SocketHandler.getInstance().assignedSessions.put(key, getSession());
-					found = true;
-				}
-			}
+			boolean found = searchSession();
 
 			if (!found) {
 				ErrorUtils.sendError(getSession(), "Invalid key", STD_VALUES.INVALID_KEY);
@@ -48,6 +40,19 @@ public class InitCommand extends BaseCommand {
 			new PaintCommand( super.getSession()).execute();
 		}
 	}
-	
-	
+
+	private boolean searchSession() {
+		List<HttpSession> activeSessions = HttpSessionConfig.getActiveSessions();
+		boolean found = false;
+		for (HttpSession activeSession : activeSessions) {
+			if (activeSession.getId()!= null && activeSession.getId().equals(key)) {
+				activeSession.setAttribute("timestamp", System.currentTimeMillis());
+				SocketHandler.getInstance().assignedSessions.put(key, getSession());
+				found = true;
+			}
+		}
+		return found;
+	}
+
+
 }

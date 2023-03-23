@@ -12,6 +12,7 @@ import java.io.IOException;
 public class ErrorUtils {
 
 
+    //Wollte Luca haben :(
     private static String[] affronts = {
             "You're a disgrace to the human race.",
             "You're a waste of oxygen.",
