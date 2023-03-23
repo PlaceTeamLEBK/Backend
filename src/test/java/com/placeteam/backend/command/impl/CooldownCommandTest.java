@@ -38,7 +38,7 @@ public class CooldownCommandTest {
     @Test
     void execute_sendsResultAsJsonToWebSocketSession() throws IOException {
         // Setup
-        final String expectedResult = "{\"data\":{\"seconds\":10},\"name\":\"cooldown\"}";
+        final String expectedResult = "{\"data\":{\"seconds\":10},\"command\":\"cooldown\"}";
 
 
         // Run the test

@@ -1,5 +1,6 @@
 package com.placeteam.backend.command;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,6 +24,7 @@ public abstract class BaseCommand {
 		this.name = name;
 	}
 
+	@JsonGetter("command")
 	public CommandNames getName() {
 		return name;
 	}
