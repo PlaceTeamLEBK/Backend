@@ -29,7 +29,6 @@ public class UpdateCommand extends BaseCommand{
 			String jsonResult = objectMapper.writeValueAsString(this);
 			SocketHandler.getInstance().sendMessage(jsonResult);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
