@@ -9,19 +9,10 @@ import com.placeteam.backend.Bootstrap;
 import com.placeteam.backend.database.DatabaseConnector;
 import com.placeteam.backend.database.DatabaseException;
 
-import java.sql.SQLException;
-import java.util.Enumeration;
-
 public class HttpInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         HttpSession session = request.getSession();
-
-		Enumeration<String> headerKeys = request.getHeaderNames();
-		while (headerKeys.hasMoreElements()) {
-			String key = headerKeys.nextElement();
-			System.err.println(key + ": " + request.getHeader(key));
-		}
 
 		String ua = request.getHeader("User-Agent");
 		String addr = request.getHeader("X-Forwarded-For");
