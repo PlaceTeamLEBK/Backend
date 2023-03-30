@@ -5,6 +5,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.placeteam.backend.Bootstrap;
+import com.placeteam.backend.database.DatabaseConnector;
+import com.placeteam.backend.database.DatabaseException;
+
+import java.sql.SQLException;
 import java.util.Enumeration;
 
 public class HttpInterceptor implements HandlerInterceptor {
@@ -18,7 +23,20 @@ public class HttpInterceptor implements HandlerInterceptor {
 			System.err.println(key + ": " + request.getHeader(key));
 		}
 
+		String ua = request.getHeader("User-Agent");
+		String addr = request.getHeader("X-Forwarded-For");
+		if (addr == null) {
+			addr = request.getRemoteAddr();
+		}
 
+		try {
+			DatabaseConnector databaseConnector = Bootstrap.getDatabaseConnector();
+			Long id = databaseConnector.setVisitor((Long)session.getAttribute("visitor"), session.getId(), addr, ua);
+			session.setAttribute("visitor", id);
+		}  catch (DatabaseException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 
 		Object timeStampAttribute = session.getAttribute("timeStamp");
 		Object freshAttribute = session.getAttribute("fresh");

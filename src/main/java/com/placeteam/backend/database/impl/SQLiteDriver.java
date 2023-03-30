@@ -59,6 +59,40 @@ public class SQLiteDriver implements DatabaseConnector {
         }
     }
 
+    private static final String SET_VISITOR_SQL = "INSERT INTO visitor (sessionId, addr, ua) VALUES (?, ?, ?);";
+    private static final String UPDATE_VISITOR_SQL = "UPDATE visitor SET sessionId = ?, addr = ?, ua = ? WHERE id = ?;";
+
+    @Override
+    public Long setVisitor(Long id, String sessionId, String addr, String ua) throws DatabaseException {
+        try {
+            if (id == null) {
+                PreparedStatement statement = connection.prepareStatement(SET_VISITOR_SQL);
+                statement.setString(1, sessionId);
+                statement.setString(2, addr);
+                statement.setString(3, ua);
+                statement.executeUpdate();
+                Long newid = null;
+                ResultSet rs = statement.getGeneratedKeys();
+
+                if (rs.next()) {
+                    newid = rs.getLong(1);
+                }
+                statement.close();
+                return newid;
+            } else {
+                PreparedStatement statement = connection.prepareStatement(UPDATE_VISITOR_SQL);
+                statement.setString(1, sessionId);
+                statement.setString(2, addr);
+                statement.setString(3, ua);
+                statement.setLong(4, id);
+                statement.executeUpdate();
+                return id;
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
+
     private static final String GET_KARTE_SQL = "SELECT max(id),x,y,color FROM pixel GROUP BY x,y;";
     @Override
     public PaintData getKarte() throws DatabaseException {
