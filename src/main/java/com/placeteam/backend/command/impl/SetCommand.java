@@ -82,7 +82,7 @@ public class SetCommand extends BaseCommand {
     private void resetCooldown() {
         HttpSession httpSession = CommandHelper.getHttpSession(getSession());
         if (httpSession != null) {
-            httpSession.setAttribute("timestamp", System.currentTimeMillis());
+            httpSession.setAttribute("lastSet", System.currentTimeMillis());
             httpSession.setAttribute("fresh", false);
         }
     }
