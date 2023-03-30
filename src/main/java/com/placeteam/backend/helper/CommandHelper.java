@@ -44,6 +44,9 @@ public class CommandHelper {
 	public static int getCooldown(WebSocketSession session) {
 
 		HttpSession httpSession = getHttpSession(session);
+		if(httpSession == null) {
+			return STD_VALUES.COOLDOWN_NOT_EXITS;
+		}
 		Long timestamp = (Long) httpSession.getAttribute("lastSet");
 		if (timestamp == null) {
 			timestamp = System.currentTimeMillis();
