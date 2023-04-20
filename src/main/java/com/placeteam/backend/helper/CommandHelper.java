@@ -31,19 +31,19 @@ public class CommandHelper {
 		return null;
 	}
 
-	public static HttpSession getHttpSession(WebSocketSession session) {
+	public static HttpSession getHttpSession(String key) {
 		List<HttpSession> activeSessions = HttpSessionConfig.getActiveSessions();
 		for (HttpSession httpSession : activeSessions) {
-			if (httpSession.getId().equals(getKey(session))) {
+			if (httpSession.getId().equals(key)) {
 				return httpSession;
 			}
 		}
 		return null;
 	}
 
-	public static int getCooldown(WebSocketSession session) {
+	public static int getCooldown(String key) {
 
-		HttpSession httpSession = getHttpSession(session);
+		HttpSession httpSession = getHttpSession(key);
 		if(httpSession == null) {
 			return STD_VALUES.COOLDOWN_NOT_EXITS;
 		}
@@ -61,7 +61,7 @@ public class CommandHelper {
 		return result > 0 ? result : 0;
 	}
 
-	public static String getKey(WebSocketSession session) {
+	/**public static String getKey(WebSocketSession session) {
 		Map<String, WebSocketSession> assignedSessions = SocketHandler.getInstance().assignedSessions;
 		for (String key : assignedSessions.keySet()) {
 			if (assignedSessions.get(key).equals(session)) {
@@ -69,5 +69,5 @@ public class CommandHelper {
 			}
 		}
 		return null;
-	}
+	}**/
 }

@@ -35,7 +35,7 @@ public class PaintCommand extends BaseCommand {
 	WebSocketSession session = super.getSession();
 	try {
 		daten = Bootstrap.getDatabaseConnector().getKarte();
-		daten.setCooldown(CommandHelper.getCooldown(getSession()));
+		daten.setCooldown(CommandHelper.getCooldown(getSession().getId()));
 		String resultAsJson = ServerUtils.getObjectMapper().writeValueAsString(this);
 		if (session.isOpen()) {
 			session.sendMessage(new TextMessage(resultAsJson));
