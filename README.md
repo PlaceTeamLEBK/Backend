@@ -66,7 +66,8 @@ Schickt dem Server eine Koordinate und eine Farbe und den Key aus der Session.
         "x": 58,
         "y": 93
       }
-  }
+  },
+  "key": "A18AE020AB878F40709EE8B8637C9070"
 }
 ```
 
