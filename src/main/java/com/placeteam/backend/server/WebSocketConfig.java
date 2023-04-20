@@ -13,16 +13,16 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	private static final String WEBSOCKET_HANDLER_PATH = "/websocket";
 	private SocketHandler socketHandler;
 
-	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		socketHandler = SocketHandler.getInstance();
-		registry.addHandler(socketHandler, WEBSOCKET_HANDLER_PATH);
-	}
-
 	@Bean
 	public ServletServerContainerFactoryBean createWebSocketContainer() {
 		ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
 		container.setMaxTextMessageBufferSize(1024 * 1024);
 		return container;
+	}
+
+	@Override
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		socketHandler = SocketHandler.getInstance();
+		registry.addHandler(socketHandler, WEBSOCKET_HANDLER_PATH);
 	}
 }

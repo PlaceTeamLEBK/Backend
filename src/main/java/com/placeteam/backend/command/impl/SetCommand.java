@@ -13,13 +13,14 @@ import com.placeteam.backend.model.Cooldown;
 import com.placeteam.backend.model.Pixel;
 import com.placeteam.backend.model.STD_VALUES;
 import com.placeteam.backend.model.enums.CommandNames;
+
 import jakarta.servlet.http.HttpSession;
 
 public class SetCommand extends BaseCommand {
 
 
 	public static final CommandNames NAME = CommandNames.SET;
-	
+
 	private final Pixel daten;
 
     private final String key;
@@ -46,12 +47,6 @@ public class SetCommand extends BaseCommand {
         }
     }
 
-    private void returnCooldown(Cooldown cooldown) {
-        CooldownCommand cooldownCommand = new CooldownCommand(cooldown);
-        cooldownCommand.setSession(getSession());
-        cooldownCommand.execute();
-    }
-
     private Cooldown handlediffrentCooldown() throws SQLException, DatabaseException {
         int cooldownTime = CommandHelper.getCooldown(key);
         Cooldown cooldown = new Cooldown();
@@ -65,21 +60,27 @@ public class SetCommand extends BaseCommand {
         return cooldown;
     }
 
-    private void setData(Cooldown cooldown) throws SQLException, DatabaseException {
-        DatabaseConnector databaseConnector = Bootstrap.getDatabaseConnector();
-    
-        databaseConnector.setPixel(key, daten.getPosition().getX(), daten.getPosition().getY(), daten.getColor());
-        new UpdateCommand(daten).execute();
-        cooldown.setCooldown(STD_VALUES.COOLDOWN_EXITS);
-        resetCooldown();
-    }
-
     private void resetCooldown() {
         HttpSession httpSession = CommandHelper.getHttpSession(key);
         if (httpSession != null) {
             httpSession.setAttribute("lastSet", System.currentTimeMillis());
             httpSession.setAttribute("fresh", false);
         }
+    }
+
+    private void returnCooldown(Cooldown cooldown) {
+        CooldownCommand cooldownCommand = new CooldownCommand(cooldown);
+        cooldownCommand.setSession(getSession());
+        cooldownCommand.execute();
+    }
+
+    private void setData(Cooldown cooldown) throws SQLException, DatabaseException {
+        DatabaseConnector databaseConnector = Bootstrap.getDatabaseConnector();
+
+        databaseConnector.setPixel(key, daten.getPosition().getX(), daten.getPosition().getY(), daten.getColor());
+        new UpdateCommand(daten).execute();
+        cooldown.setCooldown(STD_VALUES.COOLDOWN_EXITS);
+        resetCooldown();
     }
 
 

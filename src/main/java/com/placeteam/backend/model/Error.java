@@ -4,21 +4,21 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 
 public class Error {
 
-    private final String message;
     private final int code;
+    private final String message;
 
     public Error(String message, int code) {
         this.message = message;
         this.code = code;
     }
 
-    @JsonGetter("error")
-    public String getMessage() {
-        return message;
-    }
-
     @JsonGetter("code")
     public int getCode() {
         return code;
+    }
+
+    @JsonGetter("error")
+    public String getMessage() {
+        return message;
     }
 }

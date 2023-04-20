@@ -1,12 +1,12 @@
 package com.placeteam.backend.model.database;
 
 public class DBColumn {
-    private String name;
     private boolean autoincrement;
-    private String type;
-    private boolean notnull;
     private String dflt_value;
+    private String name;
+    private boolean notnull;
     private boolean pk;
+    private String type;
 
     public DBColumn(String name, boolean autoincrement, String type, boolean notnull, String dflt_value, boolean pk) {
         this.name = name;
@@ -26,55 +26,55 @@ public class DBColumn {
         this.pk = false;
     }
 
+    public String getDflt_value() {
+        return dflt_value;
+    }
+
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isAutoincrement() {
-        return autoincrement;
-    }
-
-    public void setAutoincrement(boolean autoincrement) {
-        this.autoincrement = autoincrement;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public boolean isAutoincrement() {
+        return autoincrement;
     }
 
     public boolean isNotnull() {
         return notnull;
     }
 
-    public void setNotnull(boolean notnull) {
-        this.notnull = notnull;
+    public boolean isPk() {
+        return pk;
     }
 
-    public String getDflt_value() {
-        return dflt_value;
+    public void setAutoincrement(boolean autoincrement) {
+        this.autoincrement = autoincrement;
     }
 
     public void setDflt_value(String dflt_value) {
         this.dflt_value = dflt_value;
     }
 
-    public boolean isPk() {
-        return pk;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNotnull(boolean notnull) {
+        this.notnull = notnull;
+    }
+
+    public void setNotNull() {
+        this.notnull = true;
     }
 
     public void setPk(boolean pk) {
         this.pk = pk;
     }
 
-    public void setNotNull() {
-        this.notnull = true;
+    public void setType(String type) {
+        this.type = type;
     }
 }

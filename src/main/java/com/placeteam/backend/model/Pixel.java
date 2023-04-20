@@ -3,10 +3,10 @@ package com.placeteam.backend.model;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class Pixel  {
-	
-	private Position position;
-	
+
 	private String color;
+
+	private Position position;
 
 
 	public String getColor() {
@@ -17,14 +17,14 @@ public class Pixel  {
 		return position;
 	}
 
-	@JsonSetter("position")
-	public void setPosition(Position position) {
-		this.position = position;
-	}
-
 	@JsonSetter("color")
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	@JsonSetter("position")
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 
 }

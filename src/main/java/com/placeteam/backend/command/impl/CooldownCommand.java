@@ -1,22 +1,22 @@
 package com.placeteam.backend.command.impl;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.placeteam.backend.helper.ServerUtils;
+import java.io.IOException;
+
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.placeteam.backend.command.BaseCommand;
+import com.placeteam.backend.helper.ServerUtils;
 import com.placeteam.backend.model.Cooldown;
 import com.placeteam.backend.model.enums.CommandNames;
-
-import java.io.IOException;
 
 public class CooldownCommand extends BaseCommand{
 
 	public static final CommandNames NAME = CommandNames.COOLDOWN;
-	
+
 	private final Cooldown daten;
 
 	@JsonCreator

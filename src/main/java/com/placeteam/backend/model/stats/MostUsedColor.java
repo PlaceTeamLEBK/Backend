@@ -13,12 +13,12 @@ public class MostUsedColor {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public int getCount() {
         return count;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public void setCount(int count) {

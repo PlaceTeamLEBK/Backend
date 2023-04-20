@@ -14,5 +14,5 @@ public class Cooldown  {
 	public void setCooldown(int cooldown) {
 		this.cooldown = cooldown;
 	}
-	
+
 }

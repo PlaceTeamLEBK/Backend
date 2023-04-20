@@ -1,31 +1,31 @@
 package com.placeteam.backend.model.database;
 
 public class DBTable {
-    private String tableName;
     private DBColumn[] table;
+    private String tableName;
 
     public DBTable(String tableName) {
         this.tableName = tableName;
         this.table = table;
     }
 
-    public String getTableName() {
-        return tableName;
+    public void addColumns(DBColumn[] columns) {
+        this.table = columns;
     }
 
     public DBColumn[] getTable() {
         return table;
     }
 
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
+    public String getTableName() {
+        return tableName;
     }
 
     public void setTable(DBColumn[] table) {
         this.table = table;
     }
 
-    public void addColumns(DBColumn[] columns) {
-        this.table = columns;
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 }

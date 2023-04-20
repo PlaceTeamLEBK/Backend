@@ -1,16 +1,12 @@
 package com.placeteam.backend.server;
 
 import java.net.InetAddress;
-import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class Server {
@@ -21,10 +17,10 @@ public class Server {
 
 	private ConfigurableApplicationContext ctx;
 
+	private boolean isServerStarted;
+
 	@Autowired
 	private ServerProperties serverProperties;
-
-	private boolean isServerStarted;
 
 	public Server() {
 		isServerStarted = false;

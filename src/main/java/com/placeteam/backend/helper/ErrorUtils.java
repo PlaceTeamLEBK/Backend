@@ -1,13 +1,13 @@
 package com.placeteam.backend.helper;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.placeteam.backend.model.Error;
-import com.placeteam.backend.model.STD_VALUES;
-import com.placeteam.backend.server.SocketHandler;
+import java.io.IOException;
+
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import java.io.IOException;
+import com.placeteam.backend.model.Error;
+import com.placeteam.backend.model.STD_VALUES;
+import com.placeteam.backend.server.SocketHandler;
 
 public class ErrorUtils {
 
@@ -27,6 +27,14 @@ public class ErrorUtils {
             "You're a waste of resources.",
             "You're a waste of food."};
 
+    public static String getRandomAffront() {
+        return affronts[(int) (Math.random() * affronts.length)];
+    }
+
+    public static void sendAffrontError(WebSocketSession session) {
+        sendError(session, getRandomAffront(), STD_VALUES.ERROR_CODE_AFFRONT);
+    }
+
     public static void sendError(WebSocketSession session, String message, int code) {
         try {
             String jsonString = SocketHandler.getObjectMapper().writeValueAsString(new Error(message, code));
@@ -34,14 +42,6 @@ public class ErrorUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static String getRandomAffront() {
-        return affronts[(int) (Math.random() * affronts.length)];
-    }
-
-    public static void sendAffrontError(WebSocketSession session) {
-        sendError(session, getRandomAffront(), STD_VALUES.ERROR_CODE_AFFRONT);
     }
 
     public static void sendNoDataError(WebSocketSession session) {

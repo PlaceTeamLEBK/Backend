@@ -3,9 +3,9 @@ package com.placeteam.backend.model;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class Position  {
-	
+
 	private Integer x;
-	
+
 	private Integer y;
 
 	public Integer getX() {

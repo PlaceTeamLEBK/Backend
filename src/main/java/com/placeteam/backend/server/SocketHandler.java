@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.placeteam.backend.command.impl.InitCommand;
-import com.placeteam.backend.helper.ErrorUtils;
-import com.placeteam.backend.model.Error;
-import com.placeteam.backend.model.STD_VALUES;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -23,14 +19,30 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper.Builder;
 import com.placeteam.backend.command.BaseCommand;
 import com.placeteam.backend.helper.CommandHelper;
-
-import jakarta.servlet.http.HttpSession;
+import com.placeteam.backend.helper.ErrorUtils;
+import com.placeteam.backend.model.STD_VALUES;
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
-    private List<WebSocketSession> sessions = new ArrayList<>();
-    public Map<String, WebSocketSession> assignedSessions = new HashMap<>();
+    private static class CommandModel {
+        private String command;
 
+        public String getCommand() {
+            return command;
+        }
+
+        @JsonSetter("command")
+        public void setCommand(String command) {
+            this.command = command;
+        }
+
+        @Override
+        public String toString() {
+            // TODO Auto-generated method stub
+            return getCommand();
+        }
+
+    }
     private static final SocketHandler instance = new SocketHandler();
 
     public static SocketHandler getInstance() {
@@ -46,19 +58,13 @@ public class SocketHandler extends TextWebSocketHandler {
         return buildMapper;
     }
 
+    public Map<String, WebSocketSession> assignedSessions = new HashMap<>();
+
+    private List<WebSocketSession> sessions = new ArrayList<>();
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.add(session);
-    }
-
-    public void sendMessage(String message) throws IOException {
-        TextMessage textMessage = new TextMessage(message);
-        for (WebSocketSession session : sessions) {
-            if (!session.isOpen()) {
-                continue;
-            }
-            session.sendMessage(textMessage);
-        }
     }
 
     @Override
@@ -81,23 +87,13 @@ public class SocketHandler extends TextWebSocketHandler {
         }
     }
 
-    private static class CommandModel {
-        private String command;
-
-        public String getCommand() {
-            return command;
+    public void sendMessage(String message) throws IOException {
+        TextMessage textMessage = new TextMessage(message);
+        for (WebSocketSession session : sessions) {
+            if (!session.isOpen()) {
+                continue;
+            }
+            session.sendMessage(textMessage);
         }
-
-        @JsonSetter("command")
-        public void setCommand(String command) {
-            this.command = command;
-        }
-
-        @Override
-        public String toString() {
-            // TODO Auto-generated method stub
-            return getCommand();
-        }
-
     }
 }

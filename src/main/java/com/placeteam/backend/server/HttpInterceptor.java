@@ -1,13 +1,14 @@
 package com.placeteam.backend.server;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.placeteam.backend.Bootstrap;
 import com.placeteam.backend.database.DatabaseConnector;
 import com.placeteam.backend.database.DatabaseException;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class HttpInterceptor implements HandlerInterceptor {
     @Override

@@ -3,6 +3,12 @@ package com.placeteam.backend.database;
 import com.placeteam.backend.model.STD_VALUES;
 
 public class DataValidator {
+    public static void checkColor(String color) throws DatabaseException {
+        if (!checkHexColorString(color)) {
+            throw new DatabaseException("Invalid color");
+        }
+    }
+
     public static void checkCoordinate(int x, int y) throws DatabaseException {
         boolean bedingung1 = x < 0;
         boolean bedingung2 = x > STD_VALUES.CANVAS_WIDTH;
@@ -25,11 +31,5 @@ public class DataValidator {
             }
         }
         return true;
-    }
-
-    public static void checkColor(String color) throws DatabaseException {
-        if (!checkHexColorString(color)) {
-            throw new DatabaseException("Invalid color");
-        }
     }
 }
